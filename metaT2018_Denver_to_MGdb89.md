@@ -16,6 +16,8 @@ fastqc *.gz
 
 #quality trimming
 ```
+#path: /home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
+
 sickle pe -c ${rawread_loc}/${sample_name}/Raw_Data/tmp_reads.fastq  -t sanger -m ${rawread_loc}/${sample_name}/Raw_Data/${sample_name}_interleaved_trimmed.fastq  -s ${rawread_loc}/sample_name/Raw_Data/${sample_name}_trimmed.singles.fastq
 
 for file in *.gz 
@@ -47,6 +49,8 @@ sickle pe -f F_S46_L004_R1_001 -r F_S46_L004_R2_001 -o AugM1C1D5C_R1_trimmerd.fa
 #do mapping
 #check /Users/pengfeiliu/A_Wrighton_lab/Computational_servers/summit_workspace_sh/run_bbmap_summit_MetaT2014_Methanogens_db.sh
 ```
-
+#
+cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db
+OWC_methanogens_DB89_cat.fna
 
 ```
