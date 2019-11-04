@@ -21,5 +21,7 @@ get D_S44_L004_R*
 get E_S45_L004_R*
 get F_S46_L004_R*
 
+#
+Couldn't open local file "F_S46_L004_R2_001.fastq.gz" for writing: No space left on device
 
 ```
