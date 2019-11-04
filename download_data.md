@@ -16,12 +16,15 @@ You will now get a prompt that looks like this:
 
 #
 ```
-#
-get D_S44_L004_R*
-get E_S45_L004_R*
-get F_S46_L004_R*
+#/ORG-Data is full
+#use here
+cd /home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
+screen -S transfer
+get *.gz
 
+#move data from Salmonella to here
+/home/ORG-Data-2/metaT_CU_denver2019/Salmonella_CU_denver_metaT2019
+A, B, C, and Daly_
 #
-Couldn't open local file "F_S46_L004_R2_001.fastq.gz" for writing: No space left on device
 
 ```
