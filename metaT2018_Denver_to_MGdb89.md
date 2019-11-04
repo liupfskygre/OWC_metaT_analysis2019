@@ -47,6 +47,8 @@ sickle pe -f E_S45_L004_R1_001tmp.fastq -r E_S45_L004_R2_001tmp.fastq -o AugM1C1
 #F_S46_L004_R2_001.fastq.gz
 
 sickle pe -f F_S46_L004_R1_001tmp.fastq -r F_S46_L004_R2_001tmp.fastq -o AugM1C1D5C_R1_trimmerd.fastq -p AugM1C1D5C_R2_trimmerd.fastq -s AugM1C1D5C_trimmed.singles.fastq -t sanger 
+
+
 ```
 
 #do mapping
@@ -57,11 +59,11 @@ cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogen
 mkdir OWC_metaT2018_CU_Denver_to_MGdb89
 screen -S OWC_metaT2018_CU_Denver_to_MGdb89
 #ref
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=AugM1C1D1C_R1_trimmerd.fastq in2=AugM1C1D1C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D1C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D1C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D1C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D1C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
 
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=AugM1C1D3C_R1_trimmerd.fastq in2=AugM1C1D3C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D3C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D3C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D3C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D3C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
 
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=AugM1C1D5C_R1_trimmerd.fastq in2=AugM1C1D5C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D5C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D5C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D5C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D5C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
 
 #
 
