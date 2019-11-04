@@ -2,8 +2,8 @@
 
 #Ref 
 
-# https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/metaT2014_mapping_db89.md
-
+#https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/metaT2014_mapping_db89.md
+#https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/MG_db_relative_abundance.md
 #
 cd /home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
 
