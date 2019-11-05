@@ -61,9 +61,9 @@ screen -S OWC_metaT2018_CU_Denver_to_MGdb89
 #ref
 bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D1C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D1C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D1C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
 
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D3C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D3C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D3C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D3C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D3C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D3C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
 
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D5C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/AugM1C1D5C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D5C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D5C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D5C_R2_trimmerd.fastq ambiguous=random outm=AugM1C1D5C_metaT2018_CUD_MGdb89.bam t=24 -Xmx112g
 
 #
 
