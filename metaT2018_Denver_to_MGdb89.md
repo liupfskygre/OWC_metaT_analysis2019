@@ -68,3 +68,29 @@ bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT_CU_denver
 #
 
 ```
+
+```
+for file in *.bam
+do
+samtools sort -@ 8 ${file} > "${file%.*}".sorted.bam
+done
+
+#
+jgi_summarize_bam_contig_depths --outputDepth metaT2018CUD_mapping_MGdb89_depth.txt *.sorted.bam
+
+
+```
+
+#
+```
+cat metaT2018CUD_mapping_MGdb89_depth.txt |cut -f1-4,6,8 -d$'\t' > metaT2018CUD_megahit_metaG16_depth_cut.txt
+
+sed -i -e 's/\.sorted\.bam//g' metaT2018CUD_megahit_metaG16_depth_cut.txt
+
+sed -i -e 's/_metaT2018_CUD_MGdb89//g' metaT2018CUD_megahit_metaG16_depth_cut.txt
+
+sed -i -e 's/contigName/MAGsName\.fa_contigName/g' metaT2018CUD_megahit_metaG16_depth_cut.txt
+
+sed -i -e 's/\.fa_/\t/g' metaT2018CUD_megahit_metaG16_depth_cut.txt 
+
+```
