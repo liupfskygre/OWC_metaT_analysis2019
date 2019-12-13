@@ -64,6 +64,35 @@ metaT2014_full_data_FPKM <- metaT2014_full_data %>% select(gene_id,ends_with("FP
 
 #header of output
 ```
+#*.genes.results
 gene_id	transcript_id(s)	length	effective_length	expected_count	TPM	FPKM
+
+```
+
+**bowtie2 settings when using RSEM **
+
+**This rate can be set by option '--bowtie2-mismatch-rate'??**
+
+#/opt/bowtie2-2.3.5
+
+```
+https://github.com/deweylab/RSEM/blob/master/rsem-calculate-expression
+
+default setting
+my $bowtie2 = 0;
+my $bowtie2_path = "";
+my $bowtie2_mismatch_rate = 0.1;
+my $bowtie2_k = 200;
+my $bowtie2_sensitivity_level = "sensitive"; # must be one of "very_fast", "fast", "sensitive", "very_sensitive"
+
+
+"bowtie2" => \$bowtie2,
+	   "bowtie2-path=s" => \$bowtie2_path,
+	   "bowtie2-mismatch-rate=f" => \$bowtie2_mismatch_rate,
+	   "bowtie2-k=i" => \$bowtie2_k,
+	   "bowtie2-sensitivity-level=s" => \$bowtie2_sensitivity_level,
+
+#Use Bowtie 2 instead of Bowtie to align reads. Since currently RSEM does not handle indel, local and discordant alignments, the Bowtie2 parameters are set in a way to avoid those alignments. In particular, we use options '--sensitive --dpad 0 --gbar 99999999 --mp 1,1 --np 1 --score-min L,0,-0.1' by default. The last parameter of '--score-min', '-0.1', is the negative of maximum mismatch rate. This rate can be set by option '--bowtie2-mismatch-rate'. If reads are paired-end, we additionally use options '--no-mixed' and '--no-discordant'. (Default: off)
+
 
 ```
