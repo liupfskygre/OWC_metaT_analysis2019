@@ -3,8 +3,11 @@
 **RSEM**
 ```
 https://github.com/deweylab/RSEM
+https://github.com/bli25broad/RSEM_tutorial
+```
 
 
+```
 #start from mapping
 
 #prepare reference
