@@ -96,3 +96,18 @@ my $bowtie2_sensitivity_level = "sensitive"; # must be one of "very_fast", "fast
 
 
 ```
+
+##from RSEM source
+```
+else {
+    pod2usage(-msg => "Invalid number of arguments!", -exitval => 2, -verbose => 2) if (!$paired_end && scalar(@ARGV) != 3 || $paired_end && scalar(@ARGV) != 4);    
+    pod2usage(-msg => "If --no-qualities is set, neither --phred33-quals, --phred64-quals or --solexa-quals can be active!", -exitval => 2, -verbose => 2) if ($no_qual && ($phred33 + $phred64 + $solexa > 0));
+    pod2usage(-msg => "Only one of --phred33-quals, --phred64-quals, and --solexa-quals can be active!", -exitval => 2, -verbose => 2) if ($phred33 + $phred64 + $solexa > 1);    
+    pod2usage(-msg => "--bowtie2-path, --bowtie2-mismatch-rate, --bowtie2-k and --bowtie2-sensitivity-level cannot be set if bowtie aligner is used!", -exitval => 2, -verbose => 2) if (!$bowtie2 && ($bowtie2_path ne "" || $bowtie2_mismatch_rate != 0.1 || $bowtie2_k != 200 || $bowtie2_sensitivity_level ne "sensitive"));
+    pod2usage(-msg => "--bowtie-path, --bowtie-n, --bowtie-e, --bowtie-m cannot be set if bowtie2 aligner is used!", -exitval => 2, -verbose => 2) if ($bowtie2 && ($bowtie_path ne "" || $C != 2 || $E != 99999999 || $maxHits != 200));
+    pod2usage(-msg => "Mismatch rate must be within [0, 1]!", -exitval => 2, -verbose => 2) if ($bowtie2 && ($bowtie2_mismatch_rate < 0.0 || $bowtie2_mismatch_rate > 1.0));
+    pod2usage(-msg => "Sensitivity level must be one of \"very_fast\", \"fast\", \"sensitive\", and \"very_sensitive\"!", -exitval => 2, -verbose => 2) if ($bowtie2 && (($bowtie2_sensitivity_level ne "very_fast") && ($bowtie2_sensitivity_level ne "fast") && ($bowtie2_sensitivity_level ne "sensitive") && ($bowtie2_sensitivity_level ne "very_sensitive")));
+    if ($faiF ne "") { print "Warning: There is no need to set --fai if you ask RSEM to align reads for you.\n" }
+}
+
+```
