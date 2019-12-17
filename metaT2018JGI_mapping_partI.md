@@ -115,7 +115,15 @@ done
 
 **check QC and QC filtering by sickle**
 ```
+sickle pe -f F_S46_L004_R1_001tmp.fastq -r F_S46_L004_R2_001tmp.fastq -o AugM1C1D5C_R1_trimmerd.fastq -p AugM1C1D5C_R2_trimmerd.fastq -s AugM1C1D5C_trimmed.singles.fastq -t sanger 
 
+If you have one file with interleaved forward and reverse reads:
+Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -m <interleaved trimmed paired-end output> -s <trimmed singles file>
+
+fq2fa --paired --filter  R1R2_All_trimmed.fastq R1R2_All_trimmed.fa
+--paired                           if the reads are paired-end in one file
+--merge                            if the reads are paired-end in two files
+--filter                           filter out reads containing 'N'
 ```
 
 ## reference preparation
