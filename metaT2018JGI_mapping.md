@@ -13,7 +13,7 @@
 name="Frogenwetlasoils
 
 #login and download cookies
-curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=newlifesky19870720' -c cookies > /dev/null
+curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=xxx' -c cookies > /dev/null
 
 #check the dataset to, get the path of your data
 curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml
@@ -52,15 +52,20 @@ sed -i -e 's/.*metatranscriptomes \(.*\)".*url=.*\(url=.*\)"$/\1\t\2/g' example_
 
 ```
 
+**wkdir**
+```
+#mRNA reads download to
+/home/ORG-Data-2/metaT2018JGI_reads
+
+#reads from Denver
+#/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
+```
+
 **download metaT**
 ```
 
 #download on zenith
-cd /home/projects/Wetlands/2018_sampling/JGI_assemblies
-mkdir OWC_JGI_metaspades_sam
-cd /home/projects/Wetlands/2018_sampling/JGI_assemblies/OWC_JGI_metaspades_sam
 
-screen -S JGI_sam_download
 
 for line in $(cat Frogenwetlasoils_metaT_link.txt)
 do
@@ -70,7 +75,7 @@ echo "${v1}"
 v2="$(echo "${line}"|cut -f2 -d'/')" ##change to file name, JGI gave bad name 
 echo "${v2}"
 
-curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
+curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
 
 curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > "${v2}".sam.gz
 
@@ -80,7 +85,7 @@ done
 
 ## reads preparation
 
-**QC filtering by sickle**
+**check QC and QC filtering by sickle**
 ```
 
 ```
@@ -108,9 +113,11 @@ done
 
 ## mapping to references; keep bam file
 
+#==>to discuss
 **bowtie2 or bbmap**
 
-**parameter setting and filtering**
+#==>to discuss
+**parameter setting and filtering (mismatch)**
 
 1. to owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
 ```
