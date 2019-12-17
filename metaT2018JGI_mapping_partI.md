@@ -141,14 +141,15 @@ cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 for file in *.gz 
 do 
 zcat ${file} > "${file%%.*}"tmp.fastq 
-sickle pe -c "${file%%.*}"tmp.fastq -t sanger -m "${file%%.*}"_trimmed.fastq
+sickle pe -c "${file%%.*}"tmp.fastq -t sanger -M "${file%%.*}"_trimmed.fastq
 fq2fa --paired --filter "${file%%.*}"trimmed.fastq "${file%%.*}"_trimmed.fa
 rm "${file%%.*}"tmp.fastq
 rm "${file%%.*}"_trimmed.fastq
 done
 
 #If you have one file with interleaved forward and reverse reads:
-#Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -m <interleaved trimmed paired-end output> -s <trimmed singles file>
+#Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -M <interleaved trimmed paired-end output> 
+#-m to go with -s <trimmed singles file>
 
 #fq2fa --paired --filter  R1R2_All_trimmed.fastq R1R2_All_trimmed.fa
 --paired                           if the reads are paired-end in one file
