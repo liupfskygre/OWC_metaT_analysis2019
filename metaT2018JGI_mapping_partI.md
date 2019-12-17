@@ -112,21 +112,57 @@ done
 
 #use "" if you want to have variable inside curl
 ```
+**note1**
+```
+#43 is avaliable, only 42 in the list, 
+Aug_M1_C1_D1_A is missing
+# Old Woman Creek Soil metatranscriptomes Aug_M1_C1_D1_A, missing 2018
+
+#screen -r JGI_donwload_D1A
+#download
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
+
+curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=/OldWomM1_C1_D1_A/download/_JAMO/5de62283e08d44553ef59910/52332.4.310648.TTACGGCT-AGCCGTAA.filter-MTF.fastq.gz" -b cookies > ./metaT2018JGI_reads_partI/Aug_M1_C1_D1_A.filter-MTF.fastq.gz
+
+curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=/OldWomM1_C1_D1_A/download/_JAMO/5de62284e08d44553ef59913/52332.4.310648.TTACGGCT-AGCCGTAA.filtered-report.txt" -b cookies > ./Aug_M1_C1_D1_A.filtered-report.txt
+```
+
+
+
 
 ## reads preparation
 
 **check QC and QC filtering by sickle**
 ```
-sickle pe -f F_S46_L004_R1_001tmp.fastq -r F_S46_L004_R2_001tmp.fastq -o AugM1C1D5C_R1_trimmerd.fastq -p AugM1C1D5C_R2_trimmerd.fastq -s AugM1C1D5C_trimmed.singles.fastq -t sanger 
+#
+screen -r JGI_downloadI
+cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 
-If you have one file with interleaved forward and reverse reads:
-Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -m <interleaved trimmed paired-end output> -s <trimmed singles file>
+for file in *.gz 
+do 
+zcat ${file} > "${file%%.*}"tmp.fastq 
+sickle pe -c "${file%%.*}"tmp.fastq -t sanger -m "${file%%.*}"_trimmed.fastq
+fq2fa --paired --filter "${file%%.*}"trimmed.fastq "${file%%.*}"_trimmed.fa
+rm "${file%%.*}"tmp.fastq
+rm "${file%%.*}"_trimmed.fastq
+done
 
-fq2fa --paired --filter  R1R2_All_trimmed.fastq R1R2_All_trimmed.fa
+#If you have one file with interleaved forward and reverse reads:
+#Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -m <interleaved trimmed paired-end output> -s <trimmed singles file>
+
+#fq2fa --paired --filter  R1R2_All_trimmed.fastq R1R2_All_trimmed.fa
 --paired                           if the reads are paired-end in one file
 --merge                            if the reads are paired-end in two files
 --filter                           filter out reads containing 'N'
 ```
+## quaity summary of JGI data
+```
+grep 'Output' *filtered-report.txt > OWC_metaT2018_JGI_partI_summary.txt
+
+#note, this is all rRNA filtered Pair-End data, with vary 2.6Giga bases to 21.2Gb; should be great;
+
+```
+
 
 ## reference preparation
 
@@ -173,5 +209,8 @@ fq2fa --paired --filter  R1R2_All_trimmed.fastq R1R2_All_trimmed.fa
 
 ```
 
+## expected output
 
-
+```
+TPM for each Methanogen genomes, genes and each mcrA
+```
