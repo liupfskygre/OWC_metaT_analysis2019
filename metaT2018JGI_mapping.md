@@ -11,10 +11,33 @@
 
 ```
 
-## QC filtering by sickle
+## reads preparation
+
+**QC filtering by sickle**
 ```
 
 ```
+
+## reference preparation
+
+1. owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
+```
+
+```
+
+
+
+2. DRAM annotated genes (==>gene/pathway expression)
+
+```
+
+```
+
+3. all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
+```
+
+```
+
 
 ## mapping to references; keep bam file
 1. to owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
