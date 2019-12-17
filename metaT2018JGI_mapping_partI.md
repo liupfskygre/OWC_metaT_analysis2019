@@ -18,10 +18,12 @@
 name="Frogenwetlasoils
 
 #login and download cookies
-curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=xx' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
 
 #check the dataset to, get the path of your data
-curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml #not working, manual downloading xml
+#curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml  #also work
+
+#manual downloading xml ==>get-directory.xml
 
 
 ```
