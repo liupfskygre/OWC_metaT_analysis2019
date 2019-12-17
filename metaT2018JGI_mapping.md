@@ -6,34 +6,52 @@
 
 ## download metaT from JGI, 109 samples
 
+**ref**
+```
+##to do, change to this: curl 'https://signon.jgi.doe.gov/signon/create'
 #https://github.com/liupfskygre/OWC_wetland_metaG_testing/blob/master/JGI_downloading.md
+#https://genome.jgi.doe.gov/portal/help/download.jsf
+```
 
 **download url for all**
 ```
 name="Frogenwetlasoils
 
 #login and download cookies
-curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=xxx' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=newlifesky19870720' -c cookies > /dev/null
 
 #check the dataset to, get the path of your data
-curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml
+curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml #not working, manual downloading xml
+
 
 ```
+**wkdir**
+```
+#mRNA reads download to
+/home/ORG-Data-2/metaT2018JGI_reads
+
+#mapping
+/home/projects/Wetlands/OWC_metaT2018_analysis
+
+
+
+#reads from Denver
+#/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
+```
+
 **get file url**
 ```
-#grep 'Old\ Woman\ Creek\ 2018\ metatranscriptomes' download.xml > download_OWC_metaT.xml
+grep 'Old\ Woman\ Creek\ 2018\ metatranscriptomes' get-directory.xml > get-directory_metaT2018partI.xml
+#252
+
+sed -e 's/.* \(label=.*\) filename=.* \(url=.*\) project=.*$/\1\t\2/g' get-directory_metaT2018partI.xml >get-directory_metaT2018partI_link.xml
+sed -i -e 's/.*metatranscriptomes \(.*\)".*url=.*\(url=.*\)"$/\1\t\2/g' get-directory_metaT2018partI_link.xml
+sed -i -e 's/url=//g' get-directory_metaT2018partI_link.xml
+
 
 #list of url download like this
-#/OldWomW2_C1_D2_A/download/_JAMO/5de68af8e08d44553ef59c77/52332.4.310648.CTGAAGCT-AGCTTCAG.filter-MTF.fastq.gz
-#??OldWomW2_C1_D2_A
-
 #todo ==> like this
-Aug_OW2_C1_D2_A,/OldWomW2_C1_D2_A/download/_JAMO/5de68af8e08d44553ef59c77/52332.4.310648.CTGAAGCT-AGCTTCAG.filter-MTF.fastq.gz
-
-
-
-#mRNA file download from JGI
-grep 'Old\ Woman\ Creek\ 2018\ metatranscriptomes' Frogenwetlasoils.xml  > Frogenwetlasoils_metaT.xml 
+Aug_OW2_C1_D2_A;/OldWomW2_C1_D2_A/download/_JAMO/5de68af8e08d44553ef59c77/52332.4.310648.CTGAAGCT-AGCTTCAG.filter-MTF.fastq.gz
 
 ##use this demo
 /home/liupf
@@ -42,44 +60,54 @@ sed -i -e 's/.*metatranscriptomes \(.*\)".*url=.*\(url=.*\)"$/\1\t\2/g' example_
 #Aug_M1_C3_D2	url=/OldWomg_M1_C3_D2/download/_JAMO/5de66ef1e08d44553ef59ba2/52332.4.310648.GTGCCATA-TATGGCAC.filter-MTF.fastq.gz
 
 
-
 #sed -e 's/.*url=\(.*\) project=.*/\1/g' Frogenwetlasoils_metaT.xml> Frogenwetlasoils_metaT_link.xml
-
 #sed -i -e 's/\"$//g' Frogenwetlasoils_metaT.xml> Frogenwetlasoils_metaT_link.txt
-
 #Frogenwetlasoils_metaT_link.txt
-
-
 ```
 
-**wkdir**
-```
-#mRNA reads download to
-/home/ORG-Data-2/metaT2018JGI_reads
 
-#reads from Denver
-#/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver
+**download filtering report**
 ```
+grep 'filtered-report' get-directory_metaT2018partI_link.xml >get-directory_metaT2018partI_link.report
+sed -i -e 's/\t/;/g' get-directory_metaT2018partI_link.report
+
+for line in $(cat get-directory_metaT2018partI_link.report)
+do
+echo "${line}" # '\t' cause problem
+v1="$(echo "${line}"|cut -f2 -d';')"
+echo "${v1}"
+v2="$(echo "${line}"|cut -f1 -d$';')"
+echo "${v2}"
+
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
+
+curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > "${v2}".filtered-report.txt
+done
+mv *.filtered-report.txt metaT2018JGI_reads_partI
+```
+
 
 **download metaT**
 ```
 
 #download on zenith
+grep 'filter-MTF.fastq.gz' get-directory_metaT2018partI_link.xml >get-directory_metaT2018partI_link.mRNA
+sed -i -e 's/\t/;/g' get-directory_metaT2018partI_link.mRNA
 
-
-for line in $(cat Frogenwetlasoils_metaT_link.txt)
+screen -S JGI_downloadI
+for line in $(cat get-directory_metaT2018partI_link.mRNA)
 do
-echo "${line}"
-v1="${line}"
+echo "${line}" # '\t' cause problem
+v1="$(echo "${line}"|cut -f2 -d';')"
 echo "${v1}"
-v2="$(echo "${line}"|cut -f2 -d'/')" ##change to file name, JGI gave bad name 
+v2="$(echo "${line}"|cut -f1 -d$';')"
 echo "${v2}"
 
-curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
 
-curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > "${v2}".sam.gz
-
+curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > ./metaT2018JGI_reads_partI/"${v2}".filter-MTF.fastq.gz
 done
+
 #use "" if you want to have variable inside curl
 ```
 
