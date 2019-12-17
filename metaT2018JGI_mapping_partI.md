@@ -142,7 +142,7 @@ for file in *.gz
 do 
 zcat ${file} > "${file%%.*}"tmp.fastq 
 sickle pe -c "${file%%.*}"tmp.fastq -t sanger -M "${file%%.*}"_trimmed.fastq
-fq2fa --paired --filter "${file%%.*}"trimmed.fastq "${file%%.*}"_trimmed.fa
+fq2fa --paired --filter "${file%%.*}"_trimmed.fastq "${file%%.*}"_trimmed.fa
 rm "${file%%.*}"tmp.fastq
 rm "${file%%.*}"_trimmed.fastq
 done
