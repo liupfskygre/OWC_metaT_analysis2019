@@ -210,6 +210,13 @@ grep 'Output' *filtered-report.txt > OWC_metaT2018_JGI_partI_summary.txt
 
 ```
 
+## gff based Counting mapped reads per gene??
+```
+
+
+```
+
+
 ## expected output
 
 ```
