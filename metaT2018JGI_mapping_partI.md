@@ -18,7 +18,7 @@
 name="Frogenwetlasoils
 
 #login and download cookies
-curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=newlifesky19870720' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=xx' -c cookies > /dev/null
 
 #check the dataset to, get the path of your data
 curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml #not working, manual downloading xml
@@ -79,7 +79,7 @@ echo "${v1}"
 v2="$(echo "${line}"|cut -f1 -d$';')"
 echo "${v2}"
 
-curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xx' -c cookies > /dev/null
 
 curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > "${v2}".filtered-report.txt
 done
@@ -103,7 +103,7 @@ echo "${v1}"
 v2="$(echo "${line}"|cut -f1 -d$';')"
 echo "${v2}"
 
-curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
 
 curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > ./metaT2018JGI_reads_partI/"${v2}".filter-MTF.fastq.gz
 done
