@@ -13,7 +13,7 @@
 name="Frogenwetlasoils
 
 #login and download cookies
-curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
+curl 'https://signon-old.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=password=newlifesky19870720' -c cookies > /dev/null
 
 #check the dataset to, get the path of your data
 curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism=Frogenwetlasoils' -b cookies > Frogenwetlasoils.xml
@@ -30,13 +30,22 @@ curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism
 #todo ==> like this
 Aug_OW2_C1_D2_A,/OldWomW2_C1_D2_A/download/_JAMO/5de68af8e08d44553ef59c77/52332.4.310648.CTGAAGCT-AGCTTCAG.filter-MTF.fastq.gz
 
-##modify
+
+
 #mRNA file download from JGI
 grep 'Old\ Woman\ Creek\ 2018\ metatranscriptomes' Frogenwetlasoils.xml  > Frogenwetlasoils_metaT.xml 
 
-sed -e 's/.*url=\(.*\) project=.*/\1/g' Frogenwetlasoils_metaT.xml> Frogenwetlasoils_metaT_link.xml
+##use this demo
+/home/liupf
+sed -e 's/.* \(label=.*\) filename=.* \(url=.*\) project=.*$/\1\t\2/g' example.xml >example_link.xml
+sed -i -e 's/.*metatranscriptomes \(.*\)".*url=.*\(url=.*\)"$/\1\t\2/g' example_link.xml
+#Aug_M1_C3_D2	url=/OldWomg_M1_C3_D2/download/_JAMO/5de66ef1e08d44553ef59ba2/52332.4.310648.GTGCCATA-TATGGCAC.filter-MTF.fastq.gz
 
-sed -i -e 's/\"$//g' Frogenwetlasoils_metaT.xml> Frogenwetlasoils_metaT_link.txt
+
+
+#sed -e 's/.*url=\(.*\) project=.*/\1/g' Frogenwetlasoils_metaT.xml> Frogenwetlasoils_metaT_link.xml
+
+#sed -i -e 's/\"$//g' Frogenwetlasoils_metaT.xml> Frogenwetlasoils_metaT_link.txt
 
 #Frogenwetlasoils_metaT_link.txt
 
