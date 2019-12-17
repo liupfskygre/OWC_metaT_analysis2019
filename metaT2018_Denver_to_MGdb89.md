@@ -94,3 +94,12 @@ sed -i -e 's/contigName/MAGsName\.fa_contigName/g' metaT2018CUD_megahit_metaG16_
 sed -i -e 's/\.fa_/\t/g' metaT2018CUD_megahit_metaG16_depth_cut.txt 
 
 ```
+
+**update 17-Dec-2019**
+```
+
+keep only fastq.gz
+rm *.fastq
+
+
+```
