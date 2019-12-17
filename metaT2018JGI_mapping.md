@@ -27,6 +27,10 @@ curl 'https://genome.jgi.doe.gov/portal/ext-api/downloads/get-directory?organism
 #/OldWomW2_C1_D2_A/download/_JAMO/5de68af8e08d44553ef59c77/52332.4.310648.CTGAAGCT-AGCTTCAG.filter-MTF.fastq.gz
 #??OldWomW2_C1_D2_A
 
+#todo ==> like this
+Aug_OW2_C1_D2_A,/OldWomW2_C1_D2_A/download/_JAMO/5de68af8e08d44553ef59c77/52332.4.310648.CTGAAGCT-AGCTTCAG.filter-MTF.fastq.gz
+
+##modify
 #mRNA file download from JGI
 grep 'Old\ Woman\ Creek\ 2018\ metatranscriptomes' Frogenwetlasoils.xml  > Frogenwetlasoils_metaT.xml 
 
