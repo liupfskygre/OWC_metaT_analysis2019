@@ -268,3 +268,21 @@ TPM for each Methanogen genomes, genes and each mcrA
 ```
 
 ```
+
+**compare bbmap mapping (JGI summary) and pileup.sh using correlation on FPKM**
+```
+#pileup summary of rpkm, to compare the FPKM from RSEM with the same bam file
+pileup.sh in=Aug_M1_C1_D1_C_MG89_RSEM.transcript.bam rpkm=Aug_M1_C1_D1_C_MG89_RSEM.pileup.rpkm.txt 32bit=t
+#RSEM use effective_length_i to calculate FPKM from TPM, R2=0.833 between pileup and RSEM FPKM
+
+#bbmap to generate bam file
+screen -S bbmap
+#D1_C
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R1_trimmed.fa ambiguous=random outm=Aug_M1_C1_D1_C_MGdb89_bbmap.bam t=10 -Xmx112g
+
+#D3_C
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R1_trimmed.fa ambiguous=random outm=Aug_M1_C1_D3_C_MGdb89_bbmap.bam t=10 -Xmx112g
+
+#D5_C
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa ambiguous=random outm=Aug_M1_C1_D5_C_MGdb89_bbmap.bam t=10 -Xmx112g
+```
