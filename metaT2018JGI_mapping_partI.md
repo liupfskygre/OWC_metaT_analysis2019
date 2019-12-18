@@ -222,15 +222,29 @@ done
 2. DRAM annotated genes (==>gene/pathway expression)
 
 ```
+#wkdir
+/home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/Methanogens_cleanDB_26Spet2019_dRep/dereplicated_genomes/DRAM_MGdb89_25k_annotations
+#grep -c '>' genes.fna; 141317
+#grep -c 'grade' genes.fna; 141317
+
+sed -e 's/ grade.*$//g' genes.fna > MG89_DRAM_genes_hf.fna
+MG89_DRAM_genes_hf.fna
+
+mkdir metaT2018JGI_to_MG89_DRAM_genes
+cd metaT2018JGI_to_MG89_DRAM_genes
+
+#creat ref for bowtie2
+rsem-prepare-reference ../MG89_DRAM_genes_hf.fna --bowtie2 MG89_DRAM_genes_hf
+```
+3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
+```
+#wkdir 
+/home/projects/Wetlands/OWC_mcrA_from_assemblies
+OWC_mcrA_all_clean_dedup_w_nt.faa
+OWC_mcrA_all_clean_dedup.fna 
+#987
 
 ```
-
-3. all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
-```
-
-```
-
-
 
 
 #==>to discuss
@@ -242,18 +256,6 @@ done
 ==> could be filtering later on
 
 
-2. to DRAM annotated genes (==>gene/pathway expression)
-```
-
-```
-
-3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
-```
-#wkdir 
-/home/projects/Wetlands/OWC_mcrA_from_assemblies
-OWC_mcrA_all_clean_dedup_w_nt.faa
-OWC_mcrA_all_clean_dedup.fna #987
-```
 
 ## gff based Counting mapped reads per gene??
 ```
