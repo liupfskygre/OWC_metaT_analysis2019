@@ -235,9 +235,11 @@ done
 
 #==>to discuss
 **bowtie2 or bbmap**
+==> use bowtie2 and RESM default setting
 
 #==>to discuss
 **parameter setting and filtering (mismatch)**
+==> could be filtering later on
 
 
 2. to DRAM annotated genes (==>gene/pathway expression)
@@ -247,8 +249,10 @@ done
 
 3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
 ```
-
-
+#wkdir 
+/home/projects/Wetlands/OWC_mcrA_from_assemblies
+OWC_mcrA_all_clean_dedup_w_nt.faa
+OWC_mcrA_all_clean_dedup.fna #987
 ```
 
 ## gff based Counting mapped reads per gene??
@@ -277,12 +281,16 @@ pileup.sh in=Aug_M1_C1_D1_C_MG89_RSEM.transcript.bam rpkm=Aug_M1_C1_D1_C_MG89_RS
 
 #bbmap to generate bam file
 screen -S bbmap
+
+screen -r bbmap
+
 #D1_C
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R1_trimmed.fa ambiguous=random outm=Aug_M1_C1_D1_C_MGdb89_bbmap.bam t=10 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D1_C_MGdb89_bbmap.bam t=10 -Xmx112g
+==>95M bam, 2.5G for 
 
 #D3_C
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R1_trimmed.fa ambiguous=random outm=Aug_M1_C1_D3_C_MGdb89_bbmap.bam t=10 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D3_C_MGdb89_bbmap.bam t=10 -Xmx112g &>Aug_M1_C1_D3_C_MGdb89_bbmap.log
 
 #D5_C
-bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa ambiguous=random outm=Aug_M1_C1_D5_C_MGdb89_bbmap.bam t=10 -Xmx112g
+bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D5_C_MGdb89_bbmap.bam t=10 -Xmx112g&>Aug_M1_C1_D5_C_MGdb89_bbmap.log
 ```
