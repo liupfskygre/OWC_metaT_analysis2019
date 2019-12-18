@@ -1,5 +1,11 @@
 ## this shows how to use RSEM to pipeline to do mapping and reads counts 
 
+**note**
+```
+RSEM do not take interleaved reads (although bowtie2 ok), so need 
+# reformat.sh  (or br-deinterleave-fasta.sh)
+```
+
 **RSEM**
 ```
 https://github.com/deweylab/RSEM
