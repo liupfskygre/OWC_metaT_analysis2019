@@ -239,10 +239,16 @@ rsem-prepare-reference ../MG89_DRAM_genes_hf.fna --bowtie2 MG89_DRAM_genes_hf
 3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
 ```
 #wkdir 
-/home/projects/Wetlands/OWC_mcrA_from_assemblies
+cd /home/projects/Wetlands/OWC_mcrA_from_assemblies
 OWC_mcrA_all_clean_dedup_w_nt.faa
 OWC_mcrA_all_clean_dedup.fna 
 #987
+#further checked with eggnog and hmmsearch CD blast
+
+mkdir metaT2018JGI_to_mcrA_all
+#creat ref for bowtie2
+rsem-prepare-reference ../OWC_mcrA_all_clean_dedup.fna --bowtie2 OWC_mcrA_all_clean_dedup
+
 
 ```
 
