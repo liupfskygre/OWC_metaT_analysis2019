@@ -165,6 +165,7 @@ grep 'Output' *filtered-report.txt > OWC_metaT2018_JGI_partI_summary.txt
 ```
 
 
+
 ## reference preparation
 ## mapping to references; keep bam file
 
@@ -205,7 +206,17 @@ rsem-calculate-expression --bowtie2 --no-qualities -p 20 --paired-end /home/ORG-
 done 
 ```
 
-
+## keep only R1 and R2, remove fq.gz and interleaved.fa, 
+#compress R1 and R2 to .gz file before rsem, rsem could take gz file
+```
+for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+do
+gzip ${sample}_R1_trimmed.fa
+gzip ${sample}_R1_trimmed.fa
+rm ${sample}_trimmed.fa
+rm ${sample}.filter-MTF.fastq.gz
+done
+```
 
 
 2. DRAM annotated genes (==>gene/pathway expression)
@@ -251,4 +262,9 @@ done
 
 ```
 TPM for each Methanogen genomes, genes and each mcrA
+```
+
+## clean 
+```
+
 ```
