@@ -233,8 +233,20 @@ MG89_DRAM_genes_hf.fna
 mkdir metaT2018JGI_to_MG89_DRAM_genes
 cd metaT2018JGI_to_MG89_DRAM_genes
 
+cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/Methanogens_cleanDB_26Spet2019_dRep/dereplicated_genomes/DRAM_MGdb89_25k_annotations/metaT2018JGI_to_MG89_DRAM_genes
+
 #creat ref for bowtie2
 rsem-prepare-reference ../MG89_DRAM_genes_hf.fna --bowtie2 MG89_DRAM_genes_hf
+
+screen -S MG89_DRAM_genes_hf
+
+for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+do
+echo ${sample}
+
+rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa MG89_DRAM_genes_hf ${sample}_mcrA_RSEM &>${sample}_genes_RSEM.log
+done 
+
 ```
 3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
 ```
