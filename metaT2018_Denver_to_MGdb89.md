@@ -97,9 +97,41 @@ sed -i -e 's/\.fa_/\t/g' metaT2018CUD_megahit_metaG16_depth_cut.txt
 
 **update 17-Dec-2019**
 ```
-
 keep only fastq.gz
 rm *.fastq
+```
 
+**FPKM using pileup.sh**
+```
+pileup.sh in=AugM1C1D1C_metaT2018_CUD_MGdb89.bam rpkm=AugM1C1D1C_metaT2018_CUD.pileup.rpkm.txt 32bit=t
+
+pileup.sh in=AugM1C1D3C_metaT2018_CUD_MGdb89.bam rpkm=AugM1C1D3C_metaT2018_CUD.pileup.rpkm.txt 32bit=t
+
+pileup.sh in=AugM1C1D5C_metaT2018_CUD_MGdb89.bam rpkm=AugM1C1D5C_metaT2018_CUD.pileup.rpkm.txt 32bit=t
+
+#to compare with the data with from JGI
 
 ```
+**RSEM**
+#==>not do yet, trimmed reads removed
+```
+#creat ref for bowtie2
+rsem-prepare-reference ../OWC_mcrA_all_clean_dedup.fna --bowtie2 OWC_mcrA_all_clean_dedup
+
+cd /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all
+cp /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partI_list.txt ./
+
+screen -S OWC_mcrA_all_clean_dedup
+
+for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+do
+echo ${sample}
+
+rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa OWC_mcrA_all_clean_dedup ${sample}_mcrA_RSEM &>${sample}_mcrA_RSEM.log
+done 
+
+#/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D1C_R1_trimmerd.fastq in2=/home/ORG-Data-2/metaT_CU_denver2019/OWC_metaT2018_CU_Denver/AugM1C1D1C_R2_trimmerd.fastq 
+```
+
+
+
