@@ -329,5 +329,9 @@ bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_re
 pileup.sh in=Aug_M1_C1_D1_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D1_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
 pileup.sh in=Aug_M1_C1_D3_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D3_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
 pileup.sh in=Aug_M1_C1_D5_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D5_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
-#
+
+#notes: with FPKM from UCdenver and JGI, the correlation gives similar trends but not great
+# RSEM and bbmap gives much more similar trends compared with using the same mapping on different dataset (JGI&Denver)
+# effects from different seq center>>than different bioinformatic pipeline
+
 ```
