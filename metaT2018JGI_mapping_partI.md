@@ -325,4 +325,9 @@ bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_re
 bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D5_C_MGdb89_bbmap.bam t=10 -Xmx112g&>Aug_M1_C1_D5_C_MGdb89_bbmap.log
 
 #also compare to data from UC denver 
+
+pileup.sh in=Aug_M1_C1_D1_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D1_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
+pileup.sh in=Aug_M1_C1_D3_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D3_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
+pileup.sh in=Aug_M1_C1_D5_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D5_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
+#
 ```
