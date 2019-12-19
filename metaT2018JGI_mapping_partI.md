@@ -244,7 +244,7 @@ for sample in $(cat metaT2018JGI_reads_partI_list.txt)
 do
 echo ${sample}
 
-rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa MG89_DRAM_genes_hf ${sample}_mcrA_RSEM &>${sample}_genes_RSEM.log
+rsem-calculate-expression --bowtie2 --no-qualities -p 30 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa MG89_DRAM_genes_hf ${sample}_mcrA_RSEM &>${sample}_genes_RSEM.log
 done 
 
 ```
