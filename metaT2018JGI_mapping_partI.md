@@ -206,18 +206,6 @@ rsem-calculate-expression --bowtie2 --no-qualities -p 20 --paired-end /home/ORG-
 done 
 ```
 
-## keep only R1 and R2, remove fq.gz and interleaved.fa, 
-#compress R1 and R2 to .gz file before rsem, rsem could take gz file
-```
-for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
-do
-gzip ${sample}_R1_trimmed.fa
-gzip ${sample}_R1_trimmed.fa
-rm ${sample}_trimmed.fa
-rm ${sample}.filter-MTF.fastq.gz
-done
-```
-
 
 2. DRAM annotated genes (==>gene/pathway expression)
 
@@ -334,4 +322,21 @@ pileup.sh in=Aug_M1_C1_D5_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D5_C_MG89_bbmap.pile
 # RSEM and bbmap gives much more similar trends compared with using the same mapping on different dataset (JGI&Denver)
 # effects from different seq center>>than different bioinformatic pipeline
 
+```
+
+## keep only R1 and R2, remove fq.gz and interleaved.fa, 
+#compress R1 and R2 to .gz file before rsem, rsem could take gz file
+```
+#Dec-20-2019, clean sever on partI data
+cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI 
+
+cp /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all/metaT2018JGI_reads_partI_list.txt ./
+rm ${sample}.filter-MTF.fastq.gz
+screen -S gzip
+for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+do
+gzip ${sample}_R1_trimmed.fa
+gzip ${sample}_R1_trimmed.fa
+rm ${sample}_trimmed.fa
+done
 ```
