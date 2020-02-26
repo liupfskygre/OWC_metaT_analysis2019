@@ -24,22 +24,14 @@ sed -i -e 's/url=//g' get-directory_metaT2018partII_link.xml
 
 ## download filtering report
 ```
+#on mac
+grep 'filtered-report' get-directory_metaT2018partII_link.xml >get-directory_metaT2018partII_link.report
+sed -i -e 's/\t/;/g' get-directory_metaT2018partII_link.report
+grep -w -f JGI_updatelist26March2020.txt get-directory_metaT2018partII_link.report > get-directory_metaT2018partII_link10.report
 
-```
+#transfer to zenith and download
 
-## download metaT, QC Filtered Raw Data (check the filterd report)
-#
-```
-#download on zenith
-grep 'filter-MTF.fastq.gz' get-directory_metaT2018partII_link.xml >get-directory_metaT2018partII_link.mRNA
-sed -i -e 's/\t/;/g' get-directory_metaT2018partII_link.mRNA
-#52 (right, all should be 53, see note 1 in partI)
-grep -w -f JGI_updatelist26March2020.txt get-directory_metaT2018partII_link.mRNA > JGI_updatelist26March2020.mRNA
-
-
-##
-screen -S JGI_downloadI
-for line in $(cat get-directory_metaT2018partI_link.mRNA)
+for line in $(cat get-directory_metaT2018partII_link10.report)
 do
 echo "${line}" # '\t' cause problem
 v1="$(echo "${line}"|cut -f2 -d';')"
@@ -47,12 +39,55 @@ echo "${v1}"
 v2="$(echo "${line}"|cut -f1 -d$';')"
 echo "${v2}"
 
-curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=xxx' -c cookies > /dev/null
+curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
 
-curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > ./metaT2018JGI_reads_partI/"${v2}".filter-MTF.fastq.gz
+curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > "${v2}".filtered-report.txt
 done
+```
+
+## download metaT, QC Filtered Raw Data (check the filterd report)
+
+#with suffix: MTF.fastq.gz
+#
+```
+#download on zenith
+grep 'filter-MTF.fastq.gz' get-directory_metaT2018partII_link.xml >get-directory_metaT2018partII_link.mRNA
+sed -i -e 's/\t/;/g' get-directory_metaT2018partII_link.mRNA
+#52 (right, all should be 53, see note 1 in partI)
+grep -w -f JGI_updatelist26March2020.txt get-directory_metaT2018partII_link.mRNA > JGI_updatelist26March2020.mRNA
+#10 
+
+##
+cd /home/ORG-Data-2/metaT2018JGI_reads
+
+screen -r JGI_downloadI
+  for line in $(cat JGI_updatelist26March2020.mRNA)
+  do
+  echo "${line}" # '\t' cause problem
+  v1="$(echo "${line}"|cut -f2 -d';')"
+  echo "${v1}"
+  v2="$(echo "${line}"|cut -f1 -d$';')"
+  echo "${v2}"
+
+  curl 'https://signon.jgi.doe.gov/signon/create' --data-urlencode 'login=pengfei.liu@mpi-marburg.mpg.de' --data-urlencode 'password=newlifesky19870720' -c cookies > /dev/null
+
+  curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking=true&url=${v1}" -b cookies > ./"${v2}".filter-MTF.fastq.gz
+  done
 
 #use "" if you want to have variable inside curl
 ```
 
+## 
+```
+
+for file in *.gz 
+do 
+zcat ${file} > "${file%%.*}"tmp.fastq 
+sickle pe -c "${file%%.*}"tmp.fastq -t sanger -M "${file%%.*}"_trimmed.fastq
+fq2fa --paired --filter "${file%%.*}"_trimmed.fastq "${file%%.*}"_trimmed.fa
+rm "${file%%.*}"tmp.fastq
+rm "${file%%.*}"_trimmed.fastq
+done
+
+```
 
