@@ -37,6 +37,7 @@ sed -i -e 's/\t/;/g' get-directory_metaT2018partII_link.mRNA
 grep -w -f JGI_updatelist26March2020.txt get-directory_metaT2018partII_link.mRNA > JGI_updatelist26March2020.mRNA
 
 
+##
 screen -S JGI_downloadI
 for line in $(cat get-directory_metaT2018partI_link.mRNA)
 do
