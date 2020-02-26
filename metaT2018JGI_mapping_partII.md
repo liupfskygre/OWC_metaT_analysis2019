@@ -12,7 +12,7 @@ cd /home/ORG-Data-2/metaT2018JGI_reads
 ```
 cd /Users/pengfeiliu/A_Wrighton_lab/Wetland_project/OWC_metaT2018/JGI_metaT/OWC_metaT2018_part_II
 
-grep 'Old\ Woman\ Creek\ 2018\ metatranscriptomes' get-directory.xml > get-directory_metaT2018partII.xml
+grep -E 'Old\ Woman\ Creek\ 2018\ metatranscriptomes|Old\ Woman\ Creek\ Soil\ metatranscriptomes' get-directory.xml > get-directory_metaT2018partII.xml
 #
 
 sed -e 's/.* \(label=.*\) filename=.* \(url=.*\) project=.*$/\1\t\2/g' get-directory_metaT2018partII.xml >get-directory_metaT2018partII_link.xml
@@ -53,7 +53,7 @@ done
 #download on zenith
 grep 'filter-MTF.fastq.gz' get-directory_metaT2018partII_link.xml >get-directory_metaT2018partII_link.mRNA
 sed -i -e 's/\t/;/g' get-directory_metaT2018partII_link.mRNA
-#52 (right, all should be 53, see note 1 in partI)
+#53 (right)
 grep -w -f JGI_updatelist26March2020.txt get-directory_metaT2018partII_link.mRNA > JGI_updatelist26March2020.mRNA
 #10 
 
@@ -88,6 +88,16 @@ fq2fa --paired --filter "${file%%.*}"_trimmed.fastq "${file%%.*}"_trimmed.fa
 rm "${file%%.*}"tmp.fastq
 rm "${file%%.*}"_trimmed.fastq
 done
+
+```
+
+## assemblied mRNA contigs
+```
+grep 'assembly.contigs.fasta' get-directory_metaT2018partII_link.xml >get-directory_metaT2018partII_link.assembly.contigs
+sed -i -e 's/Annotation\t//g' get-directory_metaT2018partII_link.assembly.contigs
+sed -i -e 's/ /;/g' get-directory_metaT2018partII_link.assembly.contigs
+
+#52 
 
 ```
 
