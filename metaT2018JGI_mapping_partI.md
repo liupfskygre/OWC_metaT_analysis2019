@@ -90,6 +90,8 @@ mv *.filtered-report.txt metaT2018JGI_reads_partI
 
 
 **download metaT**
+
+## QC Filtered Raw Data
 ```
 
 #download on zenith
