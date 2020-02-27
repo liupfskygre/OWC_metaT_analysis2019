@@ -100,46 +100,51 @@ sed -i -e 's/ /;/g' get-directory_metaT2018partII_link.assembly.contigs
 #53
 
 ```
-quaity summary of JGI data
+
+## quality summary of JGI data
+```
 grep 'Output' *filtered-report.txt > OWC_metaT2018_JGI_partI_summary.txt
 
 #note, this is all rRNA filtered Pair-End data, with vary 2.6Giga bases to 21.2Gb; should be great;
+```
 
-##reference preparation
+## reference preparation (done in part I)
 ```
 mapping to references; keep bam file
 owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
 #https://github.com/liupfskygre/OWC_metaT_analysis2019/blob/master/metaT2018_Denver_to_MGdb89.md
-/home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db
+
 mkdir OWC_metaT2018_to_MG89
 grep -c '>' OWC_methanogens_DB89_cat.fna
 #23049
 
-cd OWC_metaT2018_to_MG89
-rsem-prepare-reference ../OWC_methanogens_DB89_cat.fna --bowtie2 OWC_methanogens_DB89_cat
-#--star 
-to owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
-# reads: /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI 
-ls -1 *.filter-MTF.fastq.gz > /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partI_list.txt
+cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89
+#rsem-prepare-reference ../OWC_methanogens_DB89_cat.fna --bowtie2 OWC_methanogens_DB89_cat
+(done)
+```
 
+##to owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
+```
+# reads: cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII
+ls -1 *.filter-MTF.fastq.gz > /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partII_list.txt
+
+sed -i -e 's/\.filter-MTF\.fastq\.gz//g' metaT2018JGI_reads_partII_list.txt
 
 cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89
 
-screen -S OWC_MG89_RSEM
-#for sample in $(cat metaT2018JGI_reads_partI_list.txt)
-#try one,  Aug_M1_C1_D1_A
-for sample in Aug_M1_C1_D1_A
-
 screen -r OWC_MG89_RSEM
 
-for sample in $(cat metaT2018JGI_reads_partI_list.txt) #remove Aug_M1_C1_D1_A
+for sample in $(cat metaT2018JGI_reads_partII_list.txt) 
 do
 echo ${sample}
-reformat.sh in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_trimmed.fa out1=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa out2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa
+reformat.sh in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_trimmed.fa out1=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R1_trimmed.fa out2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R2_trimmed.fa
 
-rsem-calculate-expression --bowtie2 --no-qualities -p 20 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa OWC_methanogens_DB89_cat ${sample}_MG89_RSEM &>${sample}_MG89_RSEM.log
+rsem-calculate-expression --bowtie2 --no-qualities -p 12 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R2_trimmed.fa OWC_methanogens_DB89_cat ${sample}_MG89_RSEM &>${sample}_MG89_RSEM.log
 done 
-DRAM annotated genes (==>gene/pathway expression)
+```
+
+## DRAM annotated genes (==>gene/pathway expression)
+```
 #wkdir
 /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/Methanogens_cleanDB_26Spet2019_dRep/dereplicated_genomes/DRAM_MGdb89_25k_annotations
 #grep -c '>' genes.fna; 141317
