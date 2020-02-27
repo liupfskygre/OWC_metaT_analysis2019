@@ -159,7 +159,7 @@ cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogen
 #rsem-prepare-reference ../MG89_DRAM_genes_hf.fna --bowtie2 MG89_DRAM_genes_hf
 
 screen -r MG89_DRAM_genes_hf
-for sample in $(cat /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/metaT2018JGI_reads_partII_list.txt) 
+for sample in $(cat /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partII_list.txt) 
 do
 echo ${sample}
 rsem-calculate-expression --bowtie2 --no-qualities -p 12 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R2_trimmed.fa MG89_DRAM_genes_hf ${sample}_gene_RSEM &>${sample}_genes_RSEM.log
@@ -181,11 +181,11 @@ cd /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all
 
 screen -r OWC_mcrA_all_clean_dedup
 
-for sample in $(cat /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/metaT2018JGI_reads_partII_list.txt) 
+for sample in $(cat /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partII_list.txt) 
 do
 echo ${sample}
 
-rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R2_trimmed.fa OWC_mcrA_all_clean_dedup ${sample}_mcrA_RSEM &>${sample}_mcrA_RSEM.log
+rsem-calculate-expression --bowtie2 --no-qualities -p 12 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII/${sample}_R2_trimmed.fa OWC_mcrA_all_clean_dedup ${sample}_mcrA_RSEM &>${sample}_mcrA_RSEM.log
 done 
 ```
 
@@ -199,7 +199,7 @@ cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 cp /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all/metaT2018JGI_reads_partI_list.txt ./
 rm ${sample}.filter-MTF.fastq.gz
 screen -S gzip
-for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+for sample in $(cat /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partII_list.txt) 
 do
 gzip ${sample}_R1_trimmed.fa
 gzip ${sample}_R1_trimmed.fa
