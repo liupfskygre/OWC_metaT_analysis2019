@@ -237,7 +237,14 @@ echo ${sample}
 rsem-calculate-expression --bowtie2 --no-qualities -p 30 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa MG89_DRAM_genes_hf ${sample}_mcrA_RSEM &>${sample}_genes_RSEM.log
 done 
 
+#update, change file names
+for file in *_RSEM.genes.results ; do mv $file ${file//mcrA/gene} ; done
+for file in *RSEM.transcript.bam ; do mv $file ${file//mcrA/gene} ; done
+for file in *_mcrA_RSEM.stat ; do mv $file ${file//mcrA/gene} ; done
+for file in *mcrA_RSEM.isoforms.results ; do mv $file ${file//mcrA/gene} ; done
+
 ```
+
 3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
 ```
 #wkdir 
