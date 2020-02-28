@@ -243,6 +243,14 @@ for file in *RSEM.transcript.bam ; do mv $file ${file//mcrA/gene} ; done
 for file in *_mcrA_RSEM.stat ; do mv $file ${file//mcrA/gene} ; done
 for file in *mcrA_RSEM.isoforms.results ; do mv $file ${file//mcrA/gene} ; done
 
+
+screen -r MG89_DRAM_genes_hf
+
+for sample in Aug_M1_C1_D1_A 
+do
+echo ${sample}
+rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa.gz /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa.gz MG89_DRAM_genes_hf ${sample}_gene_RSEM &>${sample}_genes_RSEM.log
+done 
 ```
 
 3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
