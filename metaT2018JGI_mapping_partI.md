@@ -341,11 +341,12 @@ cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 
 cp /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all/metaT2018JGI_reads_partI_list.txt ./
 rm ${sample}.filter-MTF.fastq.gz
-screen -S gzip
+
+screen -r gzip
 for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
 do
-gzip ${sample}_R1_trimmed.fa
-gzip ${sample}_R1_trimmed.fa
-rm ${sample}_trimmed.fa
+#gzip ${sample}_R1_trimmed.fa
+gzip ${sample}_R2_trimmed.fa
+#rm ${sample}_trimmed.fa
 done
 ```
