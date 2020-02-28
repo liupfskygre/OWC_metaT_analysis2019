@@ -193,16 +193,69 @@ done
 ```
 #compress R1 and R2 to .gz file before rsem, rsem could take gz file
 
-#Dec-20-2019, clean sever on partI data
-cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI 
+#Dec-20-2019, clean sever on partII data
+cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partII 
 
-cp /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all/metaT2018JGI_reads_partI_list.txt ./
-rm ${sample}.filter-MTF.fastq.gz
-screen -S gzip
+cp /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partII_list.txt ./
+
+rm *filter-MTF.fastq.gz
+
+screen -r gzip
 for sample in $(cat /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partII_list.txt) 
 do
 gzip ${sample}_R1_trimmed.fa
-gzip ${sample}_R1_trimmed.fa
+gzip ${sample}_R2_trimmed.fa
 rm ${sample}_trimmed.fa
 done
+```
+
+## JGI coverage summary 
+
+**MG89**
+#metaT2018JGI_reads_partI_II_list.txt, partI and partII (53 samples)
+
+```
+/home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89
+
+cat metaT2018JGI_reads_partI_list.txt metaT2018JGI_reads_partII_list.txt >metaT2018JGI_reads_partI_II_list53.txt
+
+screen -S samtools_sorting
+for sample in $(cat metaT2018JGI_reads_partI_II_list53.txt)
+do 
+echo "${sample}"
+samtools sort -@ 12 "${sample}"_MG89_RSEM.transcript.bam > "${sample}"_MG89_RSEM.transcript.bam.sorted
+done
+#Aug_M1_C3_D3_MG89_RSEM.transcript.bam
+
+jgi_summarize_bam_contig_depths --outputDepth MG89_I_II_depth53.txt *bam.sorted
+
+```
+
+**MCRA**
+```
+cd /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all
+cp /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partI_II_list53.txt ./
+
+screen -S samtools_sorting2
+for sample in $(cat metaT2018JGI_reads_partI_II_list53.txt)
+do 
+echo "${sample}"
+samtools sort -@ 12 "${sample}"_mcrA_RSEM.transcript.bam > "${sample}"_mcrA_RSEM.transcript.bam.sorted
+done
+
+```
+
+**GENEs**
+```
+cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/Methanogens_cleanDB_26Spet2019_dRep/dereplicated_genomes/DRAM_MGdb89_25k_annotations/metaT2018JGI_to_MG89_DRAM_genes
+
+cp /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partI_II_list53.txt ./
+
+screen -S samtools_sorting3
+for sample in $(cat metaT2018JGI_reads_partI_II_list53.txt)
+do 
+echo "${sample}"
+samtools sort -@ 12 "${sample}"_gene_RSEM.transcript.bam > "${sample}"_gene_RSEM.transcript.bam.sorted
+done
+
 ```
