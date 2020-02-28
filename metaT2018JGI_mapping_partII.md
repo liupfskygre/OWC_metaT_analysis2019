@@ -215,7 +215,7 @@ done
 #metaT2018JGI_reads_partI_II_list.txt, partI and partII (53 samples)
 
 ```
-/home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89
+cd /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89
 
 cat metaT2018JGI_reads_partI_list.txt metaT2018JGI_reads_partII_list.txt >metaT2018JGI_reads_partI_II_list53.txt
 
@@ -229,6 +229,7 @@ done
 
 jgi_summarize_bam_contig_depths --outputDepth MG89_I_II_depth53.txt *bam.sorted
 
+#10^5
 ```
 
 **MCRA**
@@ -243,6 +244,9 @@ echo "${sample}"
 samtools sort -@ 12 "${sample}"_mcrA_RSEM.transcript.bam > "${sample}"_mcrA_RSEM.transcript.bam.sorted
 done
 
+jgi_summarize_bam_contig_depths --outputDepth MG89_mcrA_I_II_depth53.txt *bam.sorted
+
+#10^3
 ```
 
 **GENEs**
@@ -257,5 +261,18 @@ do
 echo "${sample}"
 samtools sort -@ 12 "${sample}"_gene_RSEM.transcript.bam > "${sample}"_gene_RSEM.transcript.bam.sorted
 done
+
+#Aug_M1_C1_D1_A_gene_RSEM.transcript.bam
+samtools sort -@ 12 Aug_M1_C1_D1_A_gene_RSEM.transcript.bam > Aug_M1_C1_D1_A_gene_RSEM.transcript.bam.sorted
+
+jgi_summarize_bam_contig_depths --outputDepth MG89_genes_I_II_depth53.txt *bam.sorted
+
+#10^4, ~ 1/10 of reads mapped to genome?
+```
+
+##
+```
+for file in cat (*_RSEM.genes.results
+paste PS42_S_cout.out PS43_S_cout.out PS44_S_cout.out PS46_S_cout.out phz2_S_cout.out phz3_S_cout.out phz4_S_cout.out phz5_S_cout.out | awk -F "\t" '{print $1"\t"$2"\t"$4"\t"$6"\t"$8"\t"$10"\t"$12"\t"$14"\t"$16}' > PSI_htseqcounts.txt
 
 ```
