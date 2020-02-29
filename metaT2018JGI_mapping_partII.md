@@ -230,6 +230,19 @@ done
 jgi_summarize_bam_contig_depths --outputDepth MG89_I_II_depth53.txt *bam.sorted
 
 #10^5
+
+#fix the header and formate
+.bam.sorted ==> //
+contigName ==> MAGs.fa_Scaffold
+.fa_==> \t
+_MG89_RSEM.transcript ==> //
+
+sed -e 's/\.bam\.sorted//g' MG89_I_II_depth53.txt > MG89_I_II_depth53_reformat.txt
+sed -i -e 's/contigName/MAGs.fa_Scaffold/g' MG89_I_II_depth53_reformat.txt
+sed -i -e 's/\.fa_/\t/g' MG89_I_II_depth53_reformat.txt
+sed -i -e 's/_MG89_RSEM\.transcript//g' MG89_I_II_depth53_reformat.txt
+
+
 ```
 
 **MCRA**
