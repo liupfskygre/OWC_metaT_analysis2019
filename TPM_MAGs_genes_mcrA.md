@@ -3,6 +3,12 @@
 #TPM for MAGs, from cov ==> reads#==> TPM of MAGs
 ```
 MG89_I_II_depth53.txt
+
+#https://github.com/liupfskygre/OWC_metaT_analysis2019/blob/master/metaT2014_mapping_db89.md
+#metaT_mapping_OWC2018megahit_mcrA.Rmd
+#https://github.com/liupfskygre/OWC_metaG16_ana2019/blob/master/MG_db_relative_abundance.md
+#metaT2014_MGdb89_TMP.Rmd
+#ReAb_OWC_methanogens_db88.Rmd
 ```
 
 
