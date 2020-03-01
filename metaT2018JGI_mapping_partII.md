@@ -258,8 +258,20 @@ samtools sort -@ 12 "${sample}"_mcrA_RSEM.transcript.bam > "${sample}"_mcrA_RSEM
 done
 
 jgi_summarize_bam_contig_depths --outputDepth MG89_mcrA_I_II_depth53.txt *bam.sorted
-
 #10^3
+
+#
+mkdir McrA_RSEM.genes.results_part53
+mv *_mcrA_RSEM.genes.results McrA_RSEM.genes.results_part53
+
+#fix the header and formate
+.bam.sorted ==> //
+contigName ==> MAGs.fa_Scaffold
+.fa_==> \t
+_MG89_RSEM.transcript ==> //
+
+sed -e 's/_mcrA_RSEM\.transcript\.bam\.sorted//g' MG89_mcrA_I_II_depth53.txt > MG89_mcrA_I_II_depth53_reformat.txt
+
 ```
 
 **GENEs**
