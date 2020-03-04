@@ -293,6 +293,9 @@ samtools sort -@ 12 Aug_M1_C1_D1_A_gene_RSEM.transcript.bam > Aug_M1_C1_D1_A_gen
 jgi_summarize_bam_contig_depths --outputDepth MG89_genes_I_II_depth53.txt *bam.sorted
 
 #10^4, ~ 1/10 of reads mapped to genome?
+mkdir GENEs_RSEM.genes.results_part53
+mv *gene_RSEM.genes.results  GENEs_RSEM.genes.results_part53
+
 ```
 
 ##
