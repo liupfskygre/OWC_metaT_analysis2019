@@ -1,5 +1,8 @@
 #update 2020-Feb-26
 
+##url
+https://genome.jgi.doe.gov/portal/Frogenwetlasoils/Frogenwetlasoils.info.html
+
 #additional 10 samples avaliable 
 ```
 cd /home/ORG-Data-2/metaT2018JGI_reads
