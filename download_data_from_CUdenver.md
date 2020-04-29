@@ -76,4 +76,9 @@ mv F_S46_L004_R2_001.fastq.gz Aug_M1_C1_D5_C_F_S46_L004_R2_001.fastq.gz
 -rw-rw-r--. 1 anarrowe orgdata2 4.3K Apr 28 14:37 slurm-3751.out
 -rw-rw-r--. 1 anarrowe orgdata2  440 Apr 28 18:27 slurm-3752.out
 
+fastqc Aug_M1_C2_D5_DALY16_S63_L002_R1_001.fastq.gz
+fastqc Aug_M1_C2_D5_DALY16_S63_L002_R2_001.fastq.gz
+
+fastqc Aug_OW2_C1_D5_A_DALY15_S62_L002_R1_001.fastq.gz
+fastqc Aug_OW2_C1_D5_A_DALY15_S62_L002_R2_001.fastq.gz
 ```
