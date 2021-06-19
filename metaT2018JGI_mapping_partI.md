@@ -116,7 +116,7 @@ done
 ```
 **note1**
 ```
-#43 is avaliable, only 42 in the list, 
+#43 is avaliable, only 42 in the list,
 Aug_M1_C1_D1_A is missing
 # Old Woman Creek Soil metatranscriptomes Aug_M1_C1_D1_A, missing 2018
 
@@ -140,9 +140,9 @@ curl "https://genome.jgi.doe.gov/portal/ext-api/downloads/get_tape_file?blocking
 screen -r JGI_downloadI
 cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 
-for file in *.gz 
-do 
-zcat ${file} > "${file%%.*}"tmp.fastq 
+for file in *.gz
+do
+zcat ${file} > "${file%%.*}"tmp.fastq
 sickle pe -c "${file%%.*}"tmp.fastq -t sanger -M "${file%%.*}"_trimmed.fastq
 fq2fa --paired --filter "${file%%.*}"_trimmed.fastq "${file%%.*}"_trimmed.fa
 rm "${file%%.*}"tmp.fastq
@@ -150,7 +150,7 @@ rm "${file%%.*}"_trimmed.fastq
 done
 
 #If you have one file with interleaved forward and reverse reads:
-#Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -M <interleaved trimmed paired-end output> 
+#Usage: sickle pe [options] -c <interleaved input file> -t <quality type> -M <interleaved trimmed paired-end output>
 #-m to go with -s <trimmed singles file>
 
 #fq2fa --paired --filter  R1R2_All_trimmed.fastq R1R2_All_trimmed.fa
@@ -181,12 +181,12 @@ grep -c '>' OWC_methanogens_DB89_cat.fna
 
 cd OWC_metaT2018_to_MG89
 rsem-prepare-reference ../OWC_methanogens_DB89_cat.fna --bowtie2 OWC_methanogens_DB89_cat
-#--star 
+#--star
 ```
 
 1. to owc deRep 89 Methanogens MAGs (==>transcripts recruit to genomes)
 ```
-# reads: /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI 
+# reads: /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 ls -1 *.filter-MTF.fastq.gz > /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogens_final_dRep_clean_db/OWC_metaT2018_to_MG89/metaT2018JGI_reads_partI_list.txt
 
 
@@ -205,7 +205,7 @@ echo ${sample}
 reformat.sh in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_trimmed.fa out1=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa out2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa
 
 rsem-calculate-expression --bowtie2 --no-qualities -p 20 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa OWC_methanogens_DB89_cat ${sample}_MG89_RSEM &>${sample}_MG89_RSEM.log
-done 
+done
 ```
 
 
@@ -230,12 +230,12 @@ rsem-prepare-reference ../MG89_DRAM_genes_hf.fna --bowtie2 MG89_DRAM_genes_hf
 
 screen -S MG89_DRAM_genes_hf
 
-for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+for sample in $(cat metaT2018JGI_reads_partI_list.txt)
 do
 echo ${sample}
 
 rsem-calculate-expression --bowtie2 --no-qualities -p 30 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa MG89_DRAM_genes_hf ${sample}_mcrA_RSEM &>${sample}_genes_RSEM.log
-done 
+done
 
 #update, change file names
 for file in *_RSEM.genes.results ; do mv $file ${file//mcrA/gene} ; done
@@ -246,19 +246,19 @@ for file in *mcrA_RSEM.isoforms.results ; do mv $file ${file//mcrA/gene} ; done
 
 screen -r MG89_DRAM_genes_hf
 
-for sample in Aug_M1_C1_D1_A 
+for sample in Aug_M1_C1_D1_A
 do
 echo ${sample}
 rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa.gz /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa.gz MG89_DRAM_genes_hf ${sample}_gene_RSEM &>${sample}_genes_RSEM.log
-done 
+done
 ```
 
 3. to all dereplicated OWC  mcrA (from contigs,==>transcripts to mcrA/methanogens )
 ```
-#wkdir 
+#wkdir
 cd /home/projects/Wetlands/OWC_mcrA_from_assemblies
 OWC_mcrA_all_clean_dedup_w_nt.faa
-OWC_mcrA_all_clean_dedup.fna 
+OWC_mcrA_all_clean_dedup.fna
 #987
 #further checked with eggnog and hmmsearch CD blast
 
@@ -271,12 +271,12 @@ cp /home/projects/Wetlands/2018_sampling/Methanog_targeted_coassembly/Methanogen
 
 screen -S OWC_mcrA_all_clean_dedup
 
-for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+for sample in $(cat metaT2018JGI_reads_partI_list.txt)
 do
 echo ${sample}
 
 rsem-calculate-expression --bowtie2 --no-qualities -p 10 --paired-end /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R1_trimmed.fa /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/${sample}_R2_trimmed.fa OWC_mcrA_all_clean_dedup ${sample}_mcrA_RSEM &>${sample}_mcrA_RSEM.log
-done 
+done
 ```
 
 
@@ -303,7 +303,7 @@ done
 TPM for each Methanogen genomes, genes and each mcrA
 ```
 
-## clean 
+## clean
 ```
 
 ```
@@ -321,7 +321,7 @@ screen -r bbmap
 
 #D1_C
 bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D1_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D1_C_MGdb89_bbmap.bam t=10 -Xmx112g
-==>95M bam, 2.5G for 
+==>95M bam, 2.5G for
 
 #D3_C
 bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D3_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D3_C_MGdb89_bbmap.bam t=10 -Xmx112g &>Aug_M1_C1_D3_C_MGdb89_bbmap.log
@@ -329,7 +329,7 @@ bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_re
 #D5_C
 bbmap.sh ref=../OWC_methanogens_DB89_cat.fna in=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R1_trimmed.fa in2=/home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI/Aug_M1_C1_D5_C_R2_trimmed.fa ambiguous=random outm=Aug_M1_C1_D5_C_MGdb89_bbmap.bam t=10 -Xmx112g&>Aug_M1_C1_D5_C_MGdb89_bbmap.log
 
-#also compare to data from UC denver 
+#also compare to data from UC denver
 
 pileup.sh in=Aug_M1_C1_D1_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D1_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
 pileup.sh in=Aug_M1_C1_D3_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D3_C_MG89_bbmap.pileup.rpkm.txt 32bit=t
@@ -341,17 +341,17 @@ pileup.sh in=Aug_M1_C1_D5_C_MGdb89_bbmap.bam rpkm=Aug_M1_C1_D5_C_MG89_bbmap.pile
 
 ```
 
-## keep only R1 and R2, remove fq.gz and interleaved.fa, 
+## keep only R1 and R2, remove fq.gz and interleaved.fa,
 #compress R1 and R2 to .gz file before rsem, rsem could take gz file
 ```
 #Dec-20-2019, clean sever on partI data
-cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI 
+cd /home/ORG-Data-2/metaT2018JGI_reads/metaT2018JGI_reads_partI
 
 cp /home/projects/Wetlands/OWC_mcrA_from_assemblies/metaT2018JGI_to_mcrA_all/metaT2018JGI_reads_partI_list.txt ./
 rm ${sample}.filter-MTF.fastq.gz
 
 screen -r gzip
-for sample in $(cat metaT2018JGI_reads_partI_list.txt) 
+for sample in $(cat metaT2018JGI_reads_partI_list.txt)
 do
 #gzip ${sample}_R1_trimmed.fa
 gzip ${sample}_R2_trimmed.fa
